@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 
@@ -11,8 +11,13 @@ export class PostsController {
     return this.postsService.create(createPostDto);
   }
 
-  @Get('/list')
+  @Get()
   findAll() {
     return this.postsService.findAll();
+  }
+
+  @Delete('/:id')
+  async deleteOne(@Param('id') id: string) {
+    return this.postsService.deleteOne(id);
   }
 }

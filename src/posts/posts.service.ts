@@ -21,4 +21,11 @@ export class PostsService {
     const posts = await this.prisma.post.findMany();
     return posts;
   }
+
+  async deleteOne(id: string) {
+    await this.prisma.post.delete({
+      where: { id: parseInt(id) },
+    });
+    return { message: 'Post deleted successfully' };
+  }
 }
